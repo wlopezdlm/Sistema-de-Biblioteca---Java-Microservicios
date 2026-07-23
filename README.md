@@ -89,7 +89,5 @@ El proyecto usa GitHub Actions para análisis automático con SonarCloud en cada
 - `wlopezdlm_notificaciones-service`
 - `wlopezdlm_auth-service`
 
-Para habilitar el análisis, agrega el secret `SONAR_TOKEN` en:
-**GitHub → Settings → Secrets and variables → Actions**
 
 ---
