@@ -36,6 +36,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.projectKey=tu_project_key_aqui \
-            -Dsonar.organization=tu_organizacion_aqui \
-            -Dsonar.qualitygate.wait=true
+            -Dsonar.projectKey=wlopezdlm_Sistema-de-Biblioteca---Java-Microservicios \
+            -Dsonar.organization=wlopezdlm \
+            -Dsonar.qualitygate.wait=true          
