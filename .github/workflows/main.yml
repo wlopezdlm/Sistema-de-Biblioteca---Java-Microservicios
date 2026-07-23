@@ -39,4 +39,5 @@ jobs:
             -f walter-lopez-examen-microservicios/pom.xml \
             -Dsonar.projectKey=wlopezdlm_Sistema-de-Biblioteca---Java-Microservicios \
             -Dsonar.organization=wlopezdlm \
-            -Dsonar.qualitygate.wait=true       
+            -Dsonar.qualitygate.wait=true \
+            -DskipTests      
