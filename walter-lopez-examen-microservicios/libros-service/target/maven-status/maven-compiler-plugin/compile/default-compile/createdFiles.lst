@@ -1,0 +1,13 @@
+pe\biblioteca\libros\CargaInicial.class
+pe\biblioteca\libros\service\SocioService.class
+pe\biblioteca\libros\entity\Socio.class
+pe\biblioteca\libros\exception\SocioNoEncontradoException.class
+pe\biblioteca\libros\controller\SocioController.class
+pe\biblioteca\libros\service\EjemplarService.class
+pe\biblioteca\libros\entity\Ejemplar.class
+pe\biblioteca\libros\exception\EjemplarNoEncontradoException.class
+pe\biblioteca\libros\repository\SocioRepository.class
+pe\biblioteca\libros\LibrosServiceApplication.class
+pe\biblioteca\libros\controller\EjemplarController.class
+pe\biblioteca\libros\exception\GlobalExceptionHandler.class
+pe\biblioteca\libros\repository\EjemplarRepository.class

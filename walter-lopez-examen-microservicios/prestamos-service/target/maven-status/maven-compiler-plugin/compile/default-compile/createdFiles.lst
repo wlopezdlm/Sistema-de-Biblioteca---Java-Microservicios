@@ -1,0 +1,15 @@
+pe\biblioteca\prestamos\dto\PrestamoResponse$Builder.class
+pe\biblioteca\prestamos\config\RestClientConfig.class
+pe\biblioteca\prestamos\repository\PrestamoRepository.class
+pe\biblioteca\prestamos\controller\PrestamoController.class
+pe\biblioteca\prestamos\factory\MensajeNotificacionFactory.class
+pe\biblioteca\prestamos\dto\SocioResponse.class
+pe\biblioteca\prestamos\dto\EjemplarResponse.class
+pe\biblioteca\prestamos\dto\PrestamoRequest.class
+pe\biblioteca\prestamos\dto\NotificacionRequest.class
+pe\biblioteca\prestamos\entity\Prestamo.class
+pe\biblioteca\prestamos\client\NotificacionesClient.class
+pe\biblioteca\prestamos\client\LibrosClient.class
+pe\biblioteca\prestamos\PrestamosServiceApplication.class
+pe\biblioteca\prestamos\dto\PrestamoResponse.class
+pe\biblioteca\prestamos\service\PrestamoService.class

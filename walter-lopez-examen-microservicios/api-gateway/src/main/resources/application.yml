@@ -1,0 +1,47 @@
+# =====================================================================
+#  api-gateway  ·  PERFIL POR DEFECTO (local)
+# =====================================================================
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  config:
+    import: optional:configserver:http://localhost:8888
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/v1/auth/**
+
+            - id: libros
+              uri: lb://libros-service
+              predicates:
+                - Path=/api/v1/libros/**
+
+            - id: socios
+              uri: lb://libros-service
+              predicates:
+                - Path=/api/v1/socios/**
+
+            - id: prestamos
+              uri: lb://prestamos-service
+              predicates:
+                - Path=/api/v1/prestamos/**
+
+            - id: notificaciones
+              uri: lb://notificaciones-service
+              predicates:
+                - Path=/api/v1/notificaciones/**
+
+
+jwt:
+  secret: DzbdiUOkvzu1NAVG3MwSQPS9LkYLUfjWJCybgOv50sxQcwrNaFepVVQD06PcndJ8
+

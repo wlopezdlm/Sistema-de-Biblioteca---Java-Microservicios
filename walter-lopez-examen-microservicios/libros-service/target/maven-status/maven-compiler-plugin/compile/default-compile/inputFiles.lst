@@ -1,0 +1,13 @@
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\CargaInicial.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\controller\EjemplarController.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\controller\SocioController.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\entity\Ejemplar.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\entity\Socio.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\exception\EjemplarNoEncontradoException.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\exception\GlobalExceptionHandler.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\exception\SocioNoEncontradoException.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\LibrosServiceApplication.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\repository\EjemplarRepository.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\repository\SocioRepository.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\service\EjemplarService.java
+E:\Tecsup\ProyectoFinal\walter-lopez-examen-microservicios\libros-service\src\main\java\pe\biblioteca\libros\service\SocioService.java

@@ -1,0 +1,10 @@
+# =====================================================================
+#  api-gateway  ·  PERFIL docker  (localhost -> nombres de contenedor)
+# =====================================================================
+spring:
+  config:
+    import: optional:configserver:http://config-server:8888
+
+# La URL de Eureka en Docker (eureka-server:8761) viene del Config Server,
+# del archivo application-docker.properties del repo — igual que en los
+# demas servicios.
