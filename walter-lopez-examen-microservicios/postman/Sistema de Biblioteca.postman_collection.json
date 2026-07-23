@@ -1,0 +1,947 @@
+{
+  "info": {
+    "_postman_id": "a51c2498-5614-488e-87e9-fa099f1edb6e",
+    "name": "Sistema de Biblioteca",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12918839"
+  },
+  "item": [
+    {
+      "name": "libros-service — Ejemplares",
+      "item": [
+        {
+          "name": "Crear ejemplar",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigoEjemplar\": \"BIB-0004\",\n  \"titulo\": \"El Principito\",\n  \"autor\": \"Antoine de Saint-Exupéry\",\n  \"isbn\": \"978-0156012195\",\n  \"anioPublicacion\": 1943,\n  \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/libros",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "libros"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todos los ejemplares",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/libros",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "libros"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar ejemplar por código",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Código correcto', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.codigoEjemplar).to.eql('BIB-0001');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/libros/BIB-0001",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "libros",
+                "BIB-0001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar ejemplar inexistente → 404",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Mensaje de error presente', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.error).to.include('BIB-9999');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/libros/BIB-9999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "libros",
+                "BIB-9999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar ejemplar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Cien años de soledad (Ed. Especial)\",\n  \"autor\": \"Gabriel García Márquez\",\n  \"isbn\": \"978-0060883287\",\n  \"anioPublicacion\": 1967,\n  \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/libros/BIB-0001",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "libros",
+                "BIB-0001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cambiar disponibilidad (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"disponible\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/libros/BIB-0001/disponibilidad",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "libros",
+                "BIB-0001",
+                "disponibilidad"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar ejemplar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/libros/BIB-0004",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "libros",
+                "BIB-0004"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "libros-service — Socios",
+      "item": [
+        {
+          "name": "Registrar socio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigoSocio\": \"S003\",\n  \"nombre\": \"Luis Mendoza\",\n  \"email\": \"luis.mendoza@email.com\",\n  \"telefono\": \"999777888\",\n  \"fechaInscripcion\": \"2026-07-01\",\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/socios",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "socios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todos los socios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/socios",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "socios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar socio por código",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/socios/S001",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "socios",
+                "S001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar socio inexistente → 404",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Mensaje de error presente', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.error).to.include('S999');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/socios/S999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "socios",
+                "S999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar socio",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Ana Torres Quispe\",\n  \"email\": \"ana.torres@email.com\",\n  \"telefono\": \"999111333\",\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/socios/S001",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "socios",
+                "S001"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar socio",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/socios/S003",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "socios",
+                "S003"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "prestamos-service",
+      "item": [
+        {
+          "name": "GET Listar ejemplares",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Retorna lista de ejemplares', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.be.an('array');",
+                  "    pm.expect(body.length).to.be.at.least(3);",
+                  "});",
+                  "pm.test('Contiene BIB-0001', () => {",
+                  "    const body = pm.response.json();",
+                  "    const bib0001 = body.find(e => e.codigoEjemplar === 'BIB-0001');",
+                  "    pm.expect(bib0001).to.not.be.undefined;",
+                  "    pm.expect(bib0001.disponible).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/libros",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "libros"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Listar socios",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Retorna lista de socios', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.be.an('array');",
+                  "    pm.expect(body.length).to.be.at.least(2);",
+                  "});",
+                  "pm.test('S001 está activo, S002 está inactivo', () => {",
+                  "    const body = pm.response.json();",
+                  "    const s001 = body.find(s => s.codigoSocio === 'S001');",
+                  "    const s002 = body.find(s => s.codigoSocio === 'S002');",
+                  "    pm.expect(s001.activo).to.be.true;",
+                  "    pm.expect(s002.activo).to.be.false;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{libros_port}}/api/v1/socios",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{libros_port}}",
+              "path": [
+                "api",
+                "v1",
+                "socios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Préstamo exitoso (BIB-0001 + S001)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Estado REGISTRADA', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.estado).to.eql('REGISTRADA');",
+                  "});",
+                  "pm.test('Sin motivoRechazo', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.motivoRechazo).to.be.null;",
+                  "});",
+                  "// Guardar el id para los escenarios 07 y 08",
+                  "const body = pm.response.json();",
+                  "if (body.id) {",
+                  "    pm.collectionVariables.set('prestamo_id', body.id);",
+                  "    console.log('Préstamo guardado con id:', body.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigoEjemplar\": \"BIB-0001\",\n  \"codigoSocio\": \"S001\",\n  \"diasPrestamo\": 7\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{prestamos_port}}/api/v1/prestamos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{prestamos_port}}",
+              "path": [
+                "api",
+                "v1",
+                "prestamos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Rechazado: ejemplar no disponible (BIB-0001 ya prestado)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Estado RECHAZADA', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.estado).to.eql('RECHAZADA');",
+                  "});",
+                  "pm.test('Motivo: No disponible', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.motivoRechazo).to.eql('No disponible');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigoEjemplar\": \"BIB-0001\",\n  \"codigoSocio\": \"S001\",\n  \"diasPrestamo\": 7\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{prestamos_port}}/api/v1/prestamos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{prestamos_port}}",
+              "path": [
+                "api",
+                "v1",
+                "prestamos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Rechazado: socio inactivo (S002)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Estado RECHAZADA', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.estado).to.eql('RECHAZADA');",
+                  "});",
+                  "pm.test('Motivo: Socio inactivo', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.motivoRechazo).to.eql('Socio inactivo');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigoEjemplar\": \"BIB-0002\",\n  \"codigoSocio\": \"S002\",\n  \"diasPrestamo\": 7\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{prestamos_port}}/api/v1/prestamos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{prestamos_port}}",
+              "path": [
+                "api",
+                "v1",
+                "prestamos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Rechazado: ejemplar inexistente (BIB-9999)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Estado RECHAZADA', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.estado).to.eql('RECHAZADA');",
+                  "});",
+                  "pm.test('Motivo: Ejemplar no existe', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.motivoRechazo).to.eql('Ejemplar no existe');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigoEjemplar\": \"BIB-9999\",\n  \"codigoSocio\": \"S001\",\n  \"diasPrestamo\": 7\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{prestamos_port}}/api/v1/prestamos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{prestamos_port}}",
+              "path": [
+                "api",
+                "v1",
+                "prestamos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Devolución exitosa (préstamo del paso 03)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Estado DEVUELTO', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.estado).to.eql('DEVUELTO');",
+                  "});",
+                  "pm.test('Tiene fechaDevolucionReal', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.fechaDevolucionReal).to.not.be.null;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{prestamos_port}}/api/v1/prestamos/{{prestamo_id}}/devolucion",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{prestamos_port}}",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "{{prestamo_id}}",
+                "devolucion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Devolución duplicada rechazada",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 409 Conflict', () => pm.response.to.have.status(409));",
+                  "pm.test('Mensaje de error indica préstamo ya devuelto', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(JSON.stringify(body)).to.include('devuelto');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{prestamos_port}}/api/v1/prestamos/{{prestamo_id}}/devolucion",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{prestamos_port}}",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "{{prestamo_id}}",
+                "devolucion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Listar notificaciones",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Existe al menos una notificación', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body).to.be.an('array');",
+                  "    pm.expect(body.length).to.be.at.least(1);",
+                  "});",
+                  "pm.test('La notificación tiene estado ENVIADO', () => {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body[0].estado).to.eql('ENVIADO');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{notificaciones_port}}/api/v1/notificaciones",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{notificaciones_port}}",
+              "path": [
+                "api",
+                "v1",
+                "notificaciones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todos los préstamos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{prestamos_port}}/api/v1/prestamos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{prestamos_port}}",
+              "path": [
+                "api",
+                "v1",
+                "prestamos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar préstamo por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{prestamos_port}}/api/v1/prestamos/{{prestamo_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{prestamos_port}}",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "{{prestamo_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar préstamo inexistente → 404",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{prestamos_port}}/api/v1/prestamos/99999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{prestamos_port}}",
+              "path": [
+                "api",
+                "v1",
+                "prestamos",
+                "99999"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Escenarios que se ejecutan durante la sustentación. Correr en orden."
+    },
+    {
+      "name": "notificaciones-service",
+      "item": [
+        {
+          "name": "Enviar notificación manual",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"destino\": \"ana.torres@email.com\",\n  \"mensaje\": \"Notificación de prueba manual.\",\n  \"canal\": \"EMAIL\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}:{{notificaciones_port}}/api/v1/notificaciones",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{notificaciones_port}}",
+              "path": [
+                "api",
+                "v1",
+                "notificaciones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar todas las notificaciones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}:{{notificaciones_port}}/api/v1/notificaciones",
+              "host": [
+                "{{base_url}}"
+              ],
+              "port": "{{notificaciones_port}}",
+              "path": [
+                "api",
+                "v1",
+                "notificaciones"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}:{{gatewayPort}}/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "{{host}}"
+              ],
+              "port": "{{gatewayPort}}",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "prestamo_id",
+      "value": ""
+    }
+  ]
+}
