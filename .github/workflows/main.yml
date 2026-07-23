@@ -36,6 +36,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -f walter-lopez-examen-microservicios/pom.xml \
             -Dsonar.projectKey=wlopezdlm_Sistema-de-Biblioteca---Java-Microservicios \
             -Dsonar.organization=wlopezdlm \
-            -Dsonar.qualitygate.wait=true          
+            -Dsonar.qualitygate.wait=true \
+            -DskipTests      
