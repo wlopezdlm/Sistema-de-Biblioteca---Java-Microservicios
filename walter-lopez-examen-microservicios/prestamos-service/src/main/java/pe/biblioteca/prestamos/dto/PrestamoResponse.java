@@ -3,7 +3,7 @@ package pe.biblioteca.prestamos.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-// [Patrón: Builder]
+
 public class PrestamoResponse {
 
     private Long id;

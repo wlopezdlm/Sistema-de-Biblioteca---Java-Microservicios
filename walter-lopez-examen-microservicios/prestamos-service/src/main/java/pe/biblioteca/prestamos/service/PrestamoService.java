@@ -31,7 +31,7 @@ public class PrestamoService {
     public PrestamoResponse registrar(PrestamoRequest req) {
         int dias = req.getDiasPrestamo() != null ? req.getDiasPrestamo() : 7;
 
-        // 1) Validar socio
+
         SocioResponse socio = librosClient.consultarSocio(req.getCodigoSocio());
         if (socio == null) {
             return rechazar(req, "Socio no existe");
@@ -40,7 +40,7 @@ public class PrestamoService {
             return rechazar(req, "Socio inactivo");
         }
 
-        // 2) Validar ejemplar
+
         EjemplarResponse ejemplar = librosClient.consultarEjemplar(req.getCodigoEjemplar());
         if (ejemplar == null) {
             return rechazar(req, "Ejemplar no existe");
@@ -49,10 +49,10 @@ public class PrestamoService {
             return rechazar(req, "No disponible");
         }
 
-        // 3) Marcar ejemplar como no disponible
+
         librosClient.cambiarDisponibilidad(req.getCodigoEjemplar(), false);
 
-        // 4) Persistir préstamo
+
         Prestamo prestamo = new Prestamo(
                 null,
                 req.getCodigoEjemplar(),
@@ -68,11 +68,11 @@ public class PrestamoService {
         );
         Prestamo guardado = prestamoRepository.save(prestamo);
 
-        // 5) Notificar usando Factory Method para armar el mensaje
+
         String mensaje = MensajeNotificacionFactory.crearMensaje("REGISTRADA", req.getCodigoEjemplar(), socio.getNombre());
         notificacionesClient.notificar(socio.getEmail(), mensaje);
 
-        // [Patrón: Builder] construye la respuesta para el camino exitoso
+
         return PrestamoResponse.builder()
                 .id(guardado.getId())
                 .codigoEjemplar(guardado.getCodigoEjemplar())
@@ -105,7 +105,7 @@ public class PrestamoService {
 
         librosClient.cambiarDisponibilidad(prestamo.getCodigoEjemplar(), true);
 
-        // [Patrón: Builder] construye la respuesta para el camino de devolución
+
         return PrestamoResponse.builder()
                 .id(guardado.getId())
                 .codigoEjemplar(guardado.getCodigoEjemplar())
@@ -135,7 +135,7 @@ public class PrestamoService {
         );
         Prestamo guardado = prestamoRepository.save(rechazado);
 
-        // [Patrón: Builder] construye la respuesta para el camino de rechazo
+
         return PrestamoResponse.builder()
                 .id(guardado.getId())
                 .codigoEjemplar(req.getCodigoEjemplar())
