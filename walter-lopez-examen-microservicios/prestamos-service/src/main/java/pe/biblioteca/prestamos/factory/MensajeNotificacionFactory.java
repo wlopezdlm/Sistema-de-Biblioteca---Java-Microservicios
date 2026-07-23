@@ -1,6 +1,6 @@
 package pe.biblioteca.prestamos.factory;
 
-// [Patrón: Factory Method]
+
 public class MensajeNotificacionFactory {
 
     public static String crearMensaje(String estado, String codigoEjemplar, String nombreSocio) {

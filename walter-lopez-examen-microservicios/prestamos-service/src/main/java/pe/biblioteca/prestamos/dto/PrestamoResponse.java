@@ -18,15 +18,10 @@ public class PrestamoResponse {
 
     private PrestamoResponse() {}
 
-    public Long getId() { return id; }
-    public String getCodigoEjemplar() { return codigoEjemplar; }
-    public String getCodigoSocio() { return codigoSocio; }
+
     public String getEstado() { return estado; }
     public String getMotivoRechazo() { return motivoRechazo; }
-    public LocalDateTime getFechaPrestamo() { return fechaPrestamo; }
-    public LocalDate getFechaDevolucionEsperada() { return fechaDevolucionEsperada; }
-    public LocalDateTime getFechaDevolucionReal() { return fechaDevolucionReal; }
-    public String getObservaciones() { return observaciones; }
+
 
     public static Builder builder() {
         return new Builder();
@@ -43,7 +38,7 @@ public class PrestamoResponse {
         public Builder fechaPrestamo(LocalDateTime v) { response.fechaPrestamo = v; return this; }
         public Builder fechaDevolucionEsperada(LocalDate v) { response.fechaDevolucionEsperada = v; return this; }
         public Builder fechaDevolucionReal(LocalDateTime v) { response.fechaDevolucionReal = v; return this; }
-        public Builder observaciones(String v) { response.observaciones = v; return this; }
+
 
         public PrestamoResponse build() { return response; }
     }
