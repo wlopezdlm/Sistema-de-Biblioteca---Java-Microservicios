@@ -29,6 +29,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <!-- [Clase 2] Se registra en Eureka -> asi el gateway lo encuentra como lb://auth-service -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

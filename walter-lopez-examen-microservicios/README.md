@@ -32,9 +32,9 @@ Walter Lopez.
 
 ### Autenticación
 
-| Método | Ruta | Descripción | Auth |
-|---|---|---|---|
-| POST | `/api/v1/auth/login` | Obtener token JWT | No |
+| Método | Ruta | Descripción |
+|---|---|---|
+| POST | `/api/v1/auth/login` | Obtener token JWT |
 
 ```json
 // Body

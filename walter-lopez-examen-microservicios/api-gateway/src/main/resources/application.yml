@@ -42,6 +42,7 @@ spring:
                 - Path=/api/v1/notificaciones/**
 
 
-jwt:
-  secret: DzbdiUOkvzu1NAVG3MwSQPS9LkYLUfjWJCybgOv50sxQcwrNaFepVVQD06PcndJ8
+security:
+  jwt:
+    secret: fKA8rgbgEDmvVbo8U//rv+gp5rhnfy4v6GYhRLdG11ZhzGnm+aoLLDDQrCsLZjTwoXq43/CTG/P2L2SFmQQ9pQ==
 

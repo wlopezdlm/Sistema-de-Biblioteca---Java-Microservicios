@@ -2,6 +2,7 @@ package pe.codigo.apigateway.config;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -14,17 +15,16 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
 
 
 @Component
 public class JwtAuthFilter implements GlobalFilter, Ordered {
 
-    @Value("${jwt.secret}")
-    private String secret;
+    @Value("${security.jwt.secret}")
+    private String secretBase64;
 
     private SecretKey key() {
-        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretBase64));
     }
 
     @Override
